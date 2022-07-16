@@ -8,7 +8,7 @@ export function enumFromValue<T extends Record<string, string>>(
   if (!enumName) {
     throw new Error(
       `No enum value '${value}' found in enum; values: ${JSON.stringify(
-        Object.keys(enumType)
+        Object.values(enumType)
       )}`
     );
   }

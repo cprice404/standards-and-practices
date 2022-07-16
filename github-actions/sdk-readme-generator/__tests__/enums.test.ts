@@ -17,7 +17,7 @@ describe('enumFromValue', () => {
 
   it('should throw if the enum does not contain the value', () => {
     expect(() => enumFromValue(TestEnum, 'nope')).toThrowError(
-      'No enum value \'nope\' found in enum; values: ["VALUE1","VALUE2"]'
+      'No enum value \'nope\' found in enum; values: ["value1","foo"]'
     );
   });
 });
