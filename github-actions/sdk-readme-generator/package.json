@@ -23,7 +23,7 @@
     "setup"
   ],
   "author": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "nunjucks": "3.2.3"
