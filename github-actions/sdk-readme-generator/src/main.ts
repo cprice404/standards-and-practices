@@ -22,8 +22,8 @@ function run(): void {
       `Hallo there! status: '${projectStatus}', stability: '${projectStability}'`
     );
     generateReadmeFileFromTemplateFile({
-      templateFile: 'README.md',
-      outputFile: 'README.md.out',
+      templateFile: 'README.md.template',
+      outputFile: 'README.md',
       projectStatus: projectStatus,
       projectStability: projectStability,
     });

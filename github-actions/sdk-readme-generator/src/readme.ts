@@ -1,12 +1,13 @@
 import * as nunjucks from 'nunjucks';
 import * as fs from 'fs';
 import * as markdownlint from 'markdownlint';
-import {Options as MarkdownLintOptions, Rule} from 'markdownlint';
+import {Options as MarkdownLintOptions} from 'markdownlint';
+import {ProjectStatus} from './inputs';
 
 export interface ReadmeFileGeneratorOptions {
   templateFile: string;
   outputFile: string;
-  projectStatus: string;
+  projectStatus: ProjectStatus;
   projectStability: string;
 }
 
