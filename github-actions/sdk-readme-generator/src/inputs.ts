@@ -2,7 +2,7 @@ import {enumFromValue} from './enums';
 
 export enum ProjectStatus {
   OFFICIAL = 'official',
-  INCUBATING = 'derp',
+  INCUBATING = 'incubating',
 }
 
 export function validateProjectStatus(status: string): ProjectStatus {

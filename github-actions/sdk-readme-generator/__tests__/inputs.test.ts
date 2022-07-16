@@ -7,7 +7,7 @@ describe('validateProjectStatus ', () => {
 
   it('should throw if the enum does not contain the value', () => {
     expect(() => validateProjectStatus('taco')).toThrowError(
-      'No enum value \'taco\' found in enum; values: ["official","derp"]'
+      'No enum value \'taco\' found in enum; values: ["official","incubating"]'
     );
   });
 });
