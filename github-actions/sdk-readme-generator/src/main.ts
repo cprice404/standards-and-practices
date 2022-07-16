@@ -15,7 +15,7 @@ function run(): void {
     //
     // core.setOutput('time', new Date().toTimeString());
     const projectStatus = validateProjectStatus(
-      core.getInput('project_statusy')
+      core.getInput('project_statusy', {required: true, trimWhitespace: true})
     );
     const projectStability = core.getInput('project_stability');
     core.info(
