@@ -20,6 +20,16 @@ import {generateReadmeStringFromTemplateString} from '../src/readme';
 // shows how the runner will run a javascript action with env / stdout protocol
 test('template happy path', () => {
   const templateString = `
+# Foo
+
+foo
+
+## Foo Sub
+
+foo sub
+
+# Bar  
+
 STATIC CONTENT
 PROJECT STATUS: {{ projectStatus }}
 PROJECT STABILITY: {{ projectStability }}
@@ -31,6 +41,16 @@ STATIC CONTENT
     projectStability: 'alpha',
   });
   expect(output).toEqual(`
+# Foo
+
+foo
+
+## Foo Sub
+
+foo sub
+
+# Bar  
+
 STATIC CONTENT
 PROJECT STATUS: incubating
 PROJECT STABILITY: alpha
