@@ -12,7 +12,11 @@ function run(): void {
     // core.debug(new Date().toTimeString());
     //
     // core.setOutput('time', new Date().toTimeString());
-    core.info('Hallo there!');
+    const projectStatus = core.getInput('project_status');
+    const projectStability = core.getInput('project_stability');
+    core.info(
+      `Hallo there! status: '${projectStatus}', stability: '${projectStability}'`
+    );
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }
