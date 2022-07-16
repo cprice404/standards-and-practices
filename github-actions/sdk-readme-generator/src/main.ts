@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import {generateReadmeFileFromTemplateFile} from './readme';
+import {validateProjectStatus} from './inputs';
 // import {wait} from './wait';
 
 // async function run(): Promise<void> {
@@ -13,7 +14,9 @@ function run(): void {
     // core.debug(new Date().toTimeString());
     //
     // core.setOutput('time', new Date().toTimeString());
-    const projectStatus = core.getInput('project_status');
+    const projectStatus = validateProjectStatus(
+      core.getInput('project_statusy')
+    );
     const projectStability = core.getInput('project_stability');
     core.info(
       `Hallo there! status: '${projectStatus}', stability: '${projectStability}'`
