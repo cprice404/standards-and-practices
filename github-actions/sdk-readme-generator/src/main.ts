@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import {generateReadmeFileFromTemplateFile} from './readme';
 // import {wait} from './wait';
 
 // async function run(): Promise<void> {
@@ -17,6 +18,12 @@ function run(): void {
     core.info(
       `Hallo there! status: '${projectStatus}', stability: '${projectStability}'`
     );
+    generateReadmeFileFromTemplateFile({
+      templateFile: 'README.md',
+      outputFile: 'README.md.out',
+      projectStatus: projectStatus,
+      projectStability: projectStability,
+    });
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }
