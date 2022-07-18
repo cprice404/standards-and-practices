@@ -9,7 +9,8 @@ runs:
       with:
         project_status: 'incubating'
         project_stability: 'alpha'
-    - run: |
+    - shell: bash
+      run: |
         git status
         cat README.md
     # TODO
