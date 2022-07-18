@@ -1,14 +1,20 @@
 name: 'Momento OSS README generator'
 description: 'Processes a README template for a Momento SDK, inserts standardized header etc., and commits'
 author: 'Momento'
-
+inputs:
+  project_status:
+    required: true
+    description: 'official or incubating'
+  project_stability:
+    required: true
+    description: 'alpha, beta, stable'
 runs:
   using: 'composite'
   steps:
     - uses: cprice404/standards-and-practices/github-actions/sdk-readme-generator@initial-gh-action-template.cprice-fork1
       with:
-        project_status: 'incubating'
-        project_stability: 'alpha'
+        project_status: {{  inputs.project_status }}
+        project_stability: {{ inputs.project_stability }}
     - shell: bash
       run: |
         git status
