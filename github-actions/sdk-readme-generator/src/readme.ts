@@ -36,6 +36,7 @@ interface HeaderTemplateContext {
 }
 
 const OSS_README_HEADER_TEMPLATE = `<img src="https://docs.momentohq.com/img/logo.svg" alt="logo" width="400"/>
+
 [![project status](https://momentohq.github.io/standards-and-practices/project-status-official.svg)](https://github.com/momentohq/standards-and-practices/momento-on-github.md)
 [![project status](https://momentohq.github.io/standards-and-practices/project-status-official.svg)](https://github.com/momentohq/standards-and-practices/momento-on-github.md) 
 `;
