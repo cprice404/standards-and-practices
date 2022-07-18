@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import {generateReadmeFileFromTemplateFile} from './readme';
-import {validateProjectStatus} from './inputs';
+import {validateProjectStability, validateProjectStatus} from './inputs';
 // import {wait} from './wait';
 
 // async function run(): Promise<void> {
@@ -17,7 +17,9 @@ function run(): void {
     const projectStatus = validateProjectStatus(
       core.getInput('project_status', {required: true, trimWhitespace: true})
     );
-    const projectStability = core.getInput('project_stability');
+    const projectStability = validateProjectStability(
+      core.getInput('project_stability', {required: true, trimWhitespace: true})
+    );
     core.info(
       `Hallo there! status: '${projectStatus}', stability: '${projectStability}'`
     );
