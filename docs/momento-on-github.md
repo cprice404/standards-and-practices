@@ -1,3 +1,5 @@
+<img src="https://docs.momentohq.com/img/logo.svg" alt="logo" width="400"/>
+
 # Momento on GitHub: OSS Project Status and Stability
 
 Hi!  If you're reading this page, you probably clicked on one of the badges on one of our open source projects.
