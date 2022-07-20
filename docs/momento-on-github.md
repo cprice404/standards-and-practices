@@ -18,7 +18,7 @@ Each project has badges at the top of its README that let you know what its Stat
 Project Status gives you insight into what level of support Momento provides for a project.
 Here is a list of the different Project Statuses that our open source projects may be assigned:
 
-| Status     | Description |                                                                                                                                                                      |
+| Status     | Description                                                                                                                                                                                                                                                                                                          |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | official   | Fully supported projects, such as our official SDKs.  Any bugs, performance issues, or user experience issues in these projects are of utmost importance to us and we will strive to address them as quickly as possible.                                                                                            |
 | incubating | These projects are considered experimental, not mature enough, or lacking in some manner or release quality such testing and supporting documentation. They are provided as-is. You're welcome to use them.  Projects that garner a lot of community interest will be considered for promotion to 'official' status. |
