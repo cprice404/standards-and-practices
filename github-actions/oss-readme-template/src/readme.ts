@@ -2,12 +2,14 @@ import * as nunjucks from 'nunjucks';
 import * as fs from 'fs';
 import * as markdownlint from 'markdownlint';
 import {Options as MarkdownLintOptions} from 'markdownlint';
-import {ProjectStability, ProjectStatus} from './inputs';
+import {ProjectStability, ProjectStatus, ProjectType} from './inputs';
 import {mustBeginWithOssHeader} from './markdownlint-rules/rule-must-begin-with-oss-header';
+import {verifySdkSectionHeaders} from './markdownlint-rules/verify-sdk-section-headers';
 
 export interface ReadmeFileGeneratorOptions {
   templateFile: string;
   outputFile: string;
+  projectType: ProjectType;
   projectStatus: ProjectStatus;
   projectStability: ProjectStability;
 }
@@ -18,6 +20,7 @@ export function generateReadmeFileFromTemplateFile(
   const templateContents = fs.readFileSync(options.templateFile).toString();
   const outputContents = generateReadmeStringFromTemplateString({
     templateContents: templateContents,
+    projectType: options.projectType,
     projectStatus: options.projectStatus,
     projectStability: options.projectStability,
   });
@@ -26,6 +29,7 @@ export function generateReadmeFileFromTemplateFile(
 
 interface ReadmeStringGeneratorOptions {
   templateContents: string;
+  projectType: ProjectType;
   projectStatus: ProjectStatus;
   projectStability: ProjectStability;
 }
@@ -62,7 +66,7 @@ export function generateReadmeStringFromTemplateString(
       // This rule enforces that the template must begin with an {{ ossHeader }} tag so that we can insert a consistent
       // header.
       mustBeginWithOssHeader,
-      // TODO: add more rules, e.g. to enforce that h1's exist in a consistent order for SDKs
+      ...additionalRulesForProjectType(options.projectType),
     ],
     strings: {README_template: options.templateContents},
   };
@@ -92,4 +96,17 @@ export function generateReadmeStringFromTemplateString(
     ossHeader: ossHeader,
   };
   return nunjucks.renderString(options.templateContents, templateContext);
+}
+
+function additionalRulesForProjectType(
+  projectType: ProjectType
+): Array<markdownlint.Rule> {
+  if (projectType === ProjectType.SDK) {
+    return [verifySdkSectionHeaders];
+  } else if (projectType === ProjectType.OTHER) {
+    return [];
+  } else {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    throw new Error(`Unsupported project type: ${projectType}`);
+  }
 }

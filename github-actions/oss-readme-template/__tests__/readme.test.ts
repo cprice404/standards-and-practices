@@ -1,5 +1,7 @@
 import {generateReadmeStringFromTemplateString} from '../src/readme';
-import {ProjectStability, ProjectStatus} from '../src/inputs';
+import {ProjectStability, ProjectStatus, ProjectType} from '../src/inputs';
+import * as fs from 'fs';
+import * as path from 'path';
 
 describe('readme generator', () => {
   // shows how the runner will run a javascript action with env / stdout protocol
@@ -21,6 +23,7 @@ STATIC CONTENT
 `;
     const output = generateReadmeStringFromTemplateString({
       templateContents: templateString,
+      projectType: ProjectType.OTHER,
       projectStatus: ProjectStatus.INCUBATING,
       projectStability: ProjectStability.BETA,
     });
@@ -52,6 +55,7 @@ STATIC CONTENT
     expect(() => {
       generateReadmeStringFromTemplateString({
         templateContents: templateStringWithoutOssHeader,
+        projectType: ProjectType.OTHER,
         projectStatus: ProjectStatus.INCUBATING,
         projectStability: ProjectStability.EXPERIMENTAL,
       });
@@ -59,4 +63,30 @@ STATIC CONTENT
       .toThrowError(`README template does not conform to Momento OSS requirements:
 {"lineNumber":2,"ruleNames":["must-begin-with-oss-header"],"ruleDescription":"Template must begin with OSS Header","ruleInformation":"https://github.com/momentohq/standards-and-practices/github-actions/oss-readme-generator","errorDetail":"Expected template file to begin with {{ ossHeader }}, on a line by itself.","errorContext":null,"errorRange":null,"fixInfo":null}`);
   });
+});
+
+const EXPECTED_FIRST_LINE = new RegExp(
+  '^<img src="https://docs\\.momentohq\\.com/img/logo\\.svg" alt="logo" width="400"/>'
+);
+
+it('succeeds for an SDK README that includes all of the expected section headers', () => {
+  const validTemplateContents = fs
+    .readFileSync(path.join(__dirname, 'workflows', 'valid-sdk-template.md'))
+    .toString();
+  expect(
+    generateReadmeStringFromTemplateString({
+      templateContents: validTemplateContents,
+      projectType: ProjectType.SDK,
+      projectStatus: ProjectStatus.INCUBATING,
+      projectStability: ProjectStability.EXPERIMENTAL,
+    })
+  ).toMatch(EXPECTED_FIRST_LINE);
+});
+
+it('fails for an SDK README that is missing an expected section header', () => {
+  expect(true).toEqual(false);
+});
+
+it('fails for an SDK README that has expected section headers in the wrong order', () => {
+  expect(true).toEqual(false);
 });
