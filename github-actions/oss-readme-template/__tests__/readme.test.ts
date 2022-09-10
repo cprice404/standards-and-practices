@@ -1,5 +1,10 @@
 import {generateReadmeStringFromTemplateString} from '../src/readme';
-import {ProjectStability, ProjectStatus, ProjectType} from '../src/inputs';
+import {
+  ProjectStability,
+  ProjectStatus,
+  ProjectType,
+  SdkProject,
+} from '../src/inputs';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -23,7 +28,9 @@ STATIC CONTENT
 `;
     const output = generateReadmeStringFromTemplateString({
       templateContents: templateString,
-      projectType: ProjectType.OTHER,
+      projectInfo: {
+        type: ProjectType.OTHER,
+      },
       projectStatus: ProjectStatus.INCUBATING,
       projectStability: ProjectStability.BETA,
     });
@@ -55,7 +62,7 @@ STATIC CONTENT
     expect(() => {
       generateReadmeStringFromTemplateString({
         templateContents: templateStringWithoutOssHeader,
-        projectType: ProjectType.OTHER,
+        projectInfo: {type: ProjectType.OTHER},
         projectStatus: ProjectStatus.INCUBATING,
         projectStability: ProjectStability.EXPERIMENTAL,
       });
@@ -73,10 +80,14 @@ it('succeeds for an SDK README that includes all of the expected section headers
   const validTemplateContents = fs
     .readFileSync(path.join(__dirname, 'workflows', 'valid-sdk-template.md'))
     .toString();
+  const projectInfo: SdkProject = {
+    type: ProjectType.SDK,
+    language: 'WaterLoop',
+  };
   expect(
     generateReadmeStringFromTemplateString({
       templateContents: validTemplateContents,
-      projectType: ProjectType.SDK,
+      projectInfo: projectInfo,
       projectStatus: ProjectStatus.INCUBATING,
       projectStability: ProjectStability.EXPERIMENTAL,
     })
