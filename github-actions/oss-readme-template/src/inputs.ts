@@ -5,6 +5,19 @@ export enum ProjectType {
   OTHER = 'other',
 }
 
+export interface ProjectInfo {
+  type: ProjectType;
+}
+
+export interface SdkProject extends ProjectInfo {
+  type: ProjectType.SDK;
+  language: string;
+}
+
+export interface OtherProject extends ProjectInfo {
+  type: ProjectType.OTHER;
+}
+
 export enum ProjectStatus {
   OFFICIAL = 'official',
   INCUBATING = 'incubating',

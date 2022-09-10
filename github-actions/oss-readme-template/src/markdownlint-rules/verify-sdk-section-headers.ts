@@ -53,21 +53,21 @@ export const verifySdkSectionHeaders: markdownlint.Rule = {
       });
     }
 
-    const firstHeader: HeaderWithLineNumber =
-      headers.shift() as HeaderWithLineNumber;
-    if (firstHeader.tag !== 'h1') {
-      onError({
-        lineNumber: firstHeader.lineNumber,
-        detail:
-          'Expected first header to be an h1 with string "Momento <language> Client Library".',
-      });
-    }
-    if (!firstHeader.content.match(/^Momento [^ ]+ Client$/)) {
-      onError({
-        lineNumber: firstHeader.lineNumber,
-        detail: `Expected first header to be an h1 with string "Momento <language> Client Library", found: '${firstHeader.content}'`,
-      });
-    }
+    // const firstHeader: HeaderWithLineNumber =
+    //   headers.shift() as HeaderWithLineNumber;
+    // if (firstHeader.tag !== 'h1') {
+    //   onError({
+    //     lineNumber: firstHeader.lineNumber,
+    //     detail:
+    //       'Expected first header to be an h1 with string "Momento <language> Client Library".',
+    //   });
+    // }
+    // if (!firstHeader.content.match(/^Momento [^ ]+ Client$/)) {
+    //   onError({
+    //     lineNumber: firstHeader.lineNumber,
+    //     detail: `Expected first header to be an h1 with string "Momento <language> Client Library", found: '${firstHeader.content}'`,
+    //   });
+    // }
 
     const expectedRemainingHeaders: Array<Header> = [
       {
@@ -86,10 +86,10 @@ export const verifySdkSectionHeaders: markdownlint.Rule = {
         tag: 'h3',
         content: 'Using Momento',
       },
-      {
-        tag: 'h2',
-        content: 'Running Tests :zap:',
-      },
+      // {
+      //   tag: 'h2',
+      //   content: 'Running Tests :zap:',
+      // },
     ];
 
     for (const expectedHeader of expectedRemainingHeaders) {
