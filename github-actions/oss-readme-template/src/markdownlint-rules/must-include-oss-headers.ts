@@ -59,17 +59,17 @@ function verifyTokens(
     console.error(`Found token types: ${JSON.stringify(tokenTypes)}`);
     onError({
       lineNumber: tokens[0].lineNumber,
-      detail: `${errorMessagePrefix} {{ ${ossHeaderTag} }}, on a line by itself.`,
+      detail: `${errorMessagePrefix} {{ ${expectedTag} }}, on a line by itself.`,
     });
     return;
   }
 
   const inlineToken = tokens[1];
-  if (inlineToken.content !== `{{ ${ossHeaderTag} }}`) {
+  if (inlineToken.content !== `{{ ${expectedTag} }}`) {
     console.error(`Template line: '${inlineToken.content}'`);
     onError({
       lineNumber: tokens[0].lineNumber,
-      detail: `${errorMessagePrefix} {{ ${ossHeaderTag} }}, on a line by itself.`,
+      detail: `${errorMessagePrefix} {{ ${expectedTag} }}, on a line by itself.`,
     });
     return;
   }

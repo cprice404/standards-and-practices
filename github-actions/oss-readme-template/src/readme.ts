@@ -76,7 +76,7 @@ interface SdkHeaderTemplateContext {
 const OSS_FOOTER_TEMPLATE = `
 ----------------------------------------------------------------------------------------
 For more info, visit our website at [https://gomomento.com](https://gomomento.com)!
-`;
+`.trim();
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface OssFooterTemplateContext {}

@@ -95,19 +95,36 @@ export const verifySdkSectionHeaders: markdownlint.Rule = {
     for (const expectedHeader of expectedRemainingHeaders) {
       const nextActualHeader: HeaderWithLineNumber =
         headers.shift() as HeaderWithLineNumber;
+      console.info(`Checking for expected header: '${expectedHeader.content}'`);
+      console.info(`Next actual header: '${JSON.stringify(nextActualHeader)}'`);
+      if (nextActualHeader === undefined) {
+        onError({
+          lineNumber: headerOpenLineNumber,
+          detail: `Missing expected header: '${expectedHeader.content}'`,
+        });
+        continue;
+      }
+
       if (expectedHeader.tag !== nextActualHeader.tag) {
         onError({
           lineNumber: nextActualHeader.lineNumber,
-          detail: `Expected to find next header with tag '${expectedHeader.tag}', found '${nextActualHeader.tag}`,
+          detail: `Expected to find next header with tag '${expectedHeader.tag}', found '${nextActualHeader.tag}'`,
         });
       }
 
       if (expectedHeader.content !== nextActualHeader.content) {
         onError({
           lineNumber: nextActualHeader.lineNumber,
-          detail: `Expected to find next header with content '${expectedHeader.content}', found '${nextActualHeader.content}`,
+          detail: `Expected to find next header with content '${expectedHeader.content}', found '${nextActualHeader.content}'`,
         });
       }
+    }
+
+    if (headers.length !== 0) {
+      onError({
+        lineNumber: headers[0].lineNumber,
+        detail: `Found extra header: '${headers[0].content}'`,
+      });
     }
 
     return;
